@@ -18,4 +18,17 @@
  *
  */
 
+use App\Admin\Extensions\Form\UEditor;
+use App\Admin\Extensions\Form\NewUEditor;
+use Encore\Admin\Form;
+
 Encore\Admin\Form::forget(['map', 'editor']);
+\Encore\Admin\Admin::js('vendor/laravel-admin-ext/cascade/bootstrap-treeview.min.js');
+\Encore\Admin\Admin::js('js/admin.js');
+Admin::css('vendor/laravel-admin-ext/cascade/bootstrap-treeview.min.css');
+Form::extend('editor', UEditor::class);
+Form::extend('neditor', NewUEditor::class);
+Form::extend('tags', \App\Admin\Extensions\Form\Tags::class);
+Form::extend('teches', \App\Admin\Extensions\Form\Teches::class);
+
+Form::extend('cascade', \App\Admin\Extensions\csp\cascade\src\CascadeTreeView::class);
