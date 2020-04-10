@@ -3,6 +3,7 @@
 namespace App\Admin\Controllers;
 
 use App\Models\BaseCategory;
+use Encore\Admin\Facades\Admin;
 use Illuminate\Routing\Controller;
 use Encore\Admin\Controllers\HasResourceActions;
 use Encore\Admin\Form;
@@ -31,6 +32,12 @@ class CategoryController extends Controller
      */
     public function index(Content $content)
     {
+        $this->script = <<<EOT
+        setTimeout(function () {
+            $('.dd').nestable('collapseAll');
+        },1000)
+EOT;
+        Admin::script($this->script);
         return $content
             ->title($this->title)
             ->description(trans('admin.list'))

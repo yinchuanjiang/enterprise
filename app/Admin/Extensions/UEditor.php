@@ -22,7 +22,7 @@ class UEditor extends Field
     ];
 
     // js资源
-    protected $view = 'editor.ueditor';
+    protected $view = 'admin.form.ueditor';
 
     public function render()
     {

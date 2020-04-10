@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Actions\Policy\Push;
 use App\Admin\Export\PolicyExporter;
 use App\Models\BaseCategory;
 use App\Models\BaseKeywords;
@@ -54,6 +55,7 @@ class PolicyController extends AdminController
         $grid->actions(function ($actions) {
             // 去掉查看
             $actions->disableView();
+            $actions->add(new Push());
         });
         return $grid;
     }

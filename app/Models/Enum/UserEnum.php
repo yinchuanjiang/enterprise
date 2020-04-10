@@ -3,6 +3,8 @@
 namespace App\Models\Enum;
 
 
+use App\Models\User;
+
 class UserEnum
 {
     const TYPE_PERSON = 1;//用户类型 1个人 2企业 3机构
@@ -82,5 +84,15 @@ class UserEnum
             'on' => ['value' => self::STATUS_PASS, 'text' => '通过', 'color' => 'success'],
             'off' => ['value' => self::STATUS_NO_PASS, 'text' => '不通过', 'color' => 'danger'],
         ];
+    }
+
+    public static function getListBoxUsers()
+    {
+        return User::where('status',self::STATUS_PASS)->get()->map(function ($item,$key){
+            return [
+                'id' => $item->user_id,
+                'name' => $item->user_name.'('.self::getTypeName($item->user_type).')'
+            ];
+        })->pluck('name','id')->all();
     }
 }
