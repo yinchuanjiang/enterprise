@@ -25,6 +25,7 @@ use Encore\Admin\Form;
 Encore\Admin\Form::forget(['map', 'editor']);
 \Encore\Admin\Admin::js('vendor/laravel-admin-ext/cascade/bootstrap-treeview.min.js');
 \Encore\Admin\Admin::js('js/admin.js');
+\Encore\Admin\Admin::js('https://cdn.bootcss.com/axios/0.19.2/axios.min.js');
 Admin::css('vendor/laravel-admin-ext/cascade/bootstrap-treeview.min.css');
 Form::extend('editor', UEditor::class);
 Form::extend('neditor', NewUEditor::class);

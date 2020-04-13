@@ -8,6 +8,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Support\Facades\Request;
 
 class UserController extends AdminController
 {
@@ -97,5 +98,16 @@ class UserController extends AdminController
         $form->number('status', __('Status'));
 
         return $form;
+    }
+
+    public function users()
+    {
+        return User::where('status',UserEnum::STATUS_PASS)->paginate();
+    }
+
+    public function html()
+    {
+        $users = User::where('status',UserEnum::STATUS_PASS)->paginate();
+        return view('admin.users.html',compact('users'));
     }
 }

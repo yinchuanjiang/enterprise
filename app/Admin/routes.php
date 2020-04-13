@@ -45,6 +45,7 @@ Route::group([
     //投融服务需求管理
     $router->resource('investment-requires', InvestmentRequireController::class);
     //用户管理
+    $router->get('/users/html', 'UserController@html');
     //个人用户
     $router->resource('users', UserController::class);
     //企业用户

@@ -3,31 +3,23 @@
 namespace App\Admin\Actions\Policy;
 
 use App\Models\StorePolicyUser;
+use App\Models\User;
 use Encore\Admin\Actions\BatchAction;
-use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
-class Push extends BatchAction
+class PushPoint extends BatchAction
 {
 
-    protected $selector = '.import-post';
+    protected $selector = '.push-point';
 
-    public function handle(Collection $collection, Request $request)
+    public function handle(Collection $collection)
     {
-        $userIds = $request->input('user_id');
-        if(!count($collection)){
-            return $this->response()->error('请选择政策！！')->refresh();
-        }
-        if(!$userIds)
-            return $this->response()->error('请选择推送用户！！')->refresh();
-        $userIds = explode(',',$userIds);
         $data = [];
         foreach ($collection as $model) {
-            foreach ($userIds as $id){
-                $push = StorePolicyUser::where(['policy_id' => $model->policy_id,'user_id' => $id])->first();
-                if($push)
-                    continue;
+            $ids = StorePolicyUser::where('policy_id', $model->policy_id)->pluck('user_id')->toArray();
+            $userIds = User::whereNotIn('user_id',$ids)->pluck('user_id')->toArray();
+            foreach ($userIds as $id) {
                 $data[] = [
                     'user_id' => $id,
                     'policy_id' => $model->policy_id,
@@ -36,21 +28,20 @@ class Push extends BatchAction
                 ];
             }
         }
-        if($data)
+        if ($data)
             DB::table('t_store_policy_users')->insert($data);
         return $this->response()->success('推送完成！')->refresh();
     }
 
-    public function form()
+    public function dialog()
     {
-        $this->radio('xx','选择用户')->options([]);
-        $this->hidden('user_id');
+        $this->confirm('确定推送吗？');
     }
 
     public function html()
     {
         return <<<HTML
-        <a class="btn btn-sm btn-danger import-post"><i class="fa fa-location-arrow"></i>推送</a>
+        <a class="btn btn-sm btn-success push-point"><i class="fa fa-location-arrow"></i>给未推送的人推送</a>
 HTML;
     }
 

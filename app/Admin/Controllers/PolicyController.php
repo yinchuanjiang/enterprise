@@ -3,6 +3,8 @@
 namespace App\Admin\Controllers;
 
 use App\Admin\Actions\Policy\Push;
+use App\Admin\Actions\Policy\PushPoint;
+use App\Admin\Actions\Policy\PushType;
 use App\Admin\Export\PolicyExporter;
 use App\Models\BaseCategory;
 use App\Models\BaseKeywords;
@@ -55,8 +57,21 @@ class PolicyController extends AdminController
         $grid->actions(function ($actions) {
             // 去掉查看
             $actions->disableView();
-            $actions->add(new Push());
+            $actions->disableDelete();
+            $actions->add(new PushType());
         });
+        $grid->tools(function (Grid\Tools $tools) {
+            $tools->append(new Push());
+        });
+
+        $this->script = <<<EOL
+        $('#app-admin-actions-policy-push .modal-body').append('<iframe src="/admin/users/html" width="100%" height="600" frameborder="no" border="0"></iframe>');
+        $('#app-admin-actions-policy-push .btn-primary').click(function(){
+            $('input[name="user_id"]').val(window.localStorage.getItem('userId'));
+        });
+EOL;
+        Admin::script($this->script);
+
         return $grid;
     }
 
