@@ -105,7 +105,7 @@ class CompanyController extends AdminController
             //$form->image('business_license_pic', '营业执照图片');
             $form->text('register_address', '注册地址')->icon('fa-map-marker');
             $form->cascade('fielddetails','行业明细');
-            $form->text('company_seq', __('Sort'))->setWidth(2,2)->default(0)->help('数字小排序靠前')->rules('numeric',[
+            $form->text('company_seq', '排序')->setWidth(2,2)->default(0)->help('数字小排序靠前')->rules('numeric',[
                 'numeric' => '排序必须是数字'
             ])->icon('fa-sort-numeric-asc');
             if($form->isEditing()){
