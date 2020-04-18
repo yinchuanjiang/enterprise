@@ -60,4 +60,6 @@ Route::group([
     $router->resource('suggests', SuggestController::class);
     //banner图管理
     $router->resource('banners', BannerController::class);
+    //版本更新
+    $router->resource('upgrades', UpgradeController::class);
 });
