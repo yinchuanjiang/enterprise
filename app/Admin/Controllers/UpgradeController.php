@@ -34,7 +34,8 @@ class UpgradeController extends AdminController
         })->label('success')->filter(UpgradeEnum::getTyps());
         $grid->column('download_url', '下载地址');
         $grid->column('create_time', '添加时间');
-        //禁用导出数据按钮
+        $grid->disableFilter();
+        //禁用导出数据按
         $grid->disableExport();
         //关闭行操作 删除
         $grid->actions(function ($actions) {
