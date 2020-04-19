@@ -44,14 +44,23 @@ class UserController extends AdminController
                 return '<span class="label label-success">已绑定</span>';
             }
         });
-        $grid->column('status', '状态')->filter(UserEnum::getStatus())->radio(UserEnum::getStatus());
+        //$grid->column('status', '状态')->filter(UserEnum::getStatus())->radio(UserEnum::getStatus());
+        $grid->column('status', '状态')->display(function ($status){
+            return UserEnum::getStatusName($status);
+        })->filter(UserEnum::getStatus())->label([
+            UserEnum::STATUS_TO_PASS => 'warning',
+            UserEnum::STATUS_NO_PASS => 'danger',
+            UserEnum::STATUS_PASS => 'success'
+        ]);
         $grid->column('create_time', '注册时间');
         $grid->disableExport();
         $grid->actions(function ($actions) {
             // 去掉查看
             $actions->disableView();
             $actions->disableEdit();
+            $actions->disableDelete();
         });
+        $grid->disableCreateButton();
         return $grid;
     }
 

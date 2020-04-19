@@ -2,6 +2,8 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Actions\User\Pass;
+use App\Admin\Actions\User\Refuse;
 use App\Models\Enum\UserEnum;
 use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
@@ -44,14 +46,28 @@ class CompanyUserController extends AdminController
                 return '<span class="label label-success">已绑定</span>';
             }
         });
-        $grid->column('status', '状态')->filter(UserEnum::getStatus())->radio(UserEnum::getStatus());
+        //$grid->column('status', '状态')->filter(UserEnum::getStatus())->radio(UserEnum::getStatus());
+        $grid->column('status', '状态')->display(function ($status){
+            return UserEnum::getStatusName($status);
+        })->filter(UserEnum::getStatus())->label([
+            UserEnum::STATUS_TO_PASS => 'warning',
+            UserEnum::STATUS_NO_PASS => 'danger',
+            UserEnum::STATUS_PASS => 'success'
+        ]);
         $grid->column('create_time', '注册时间');
         $grid->disableExport();
         $grid->actions(function ($actions) {
             // 去掉查看
             $actions->disableView();
             $actions->disableEdit();
+            $actions->disableDelete();
+            if($actions->row->status == UserEnum::STATUS_TO_PASS){
+                $actions->add(new Pass());
+                $actions->add(new Refuse());
+            }
         });
+        $grid->disableBatchActions();
+        $grid->disableCreateButton();
         return $grid;
     }
 
