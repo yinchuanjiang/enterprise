@@ -26,7 +26,7 @@ class CompanyUserController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new User);
-        $grid->model()->where('user_type',UserEnum::TYPE_COMPANY)->orderBy('id','desc');
+        $grid->model()->where('user_type',UserEnum::TYPE_COMPANY)->orderBy('user_id','desc');
         $grid->column('user_id', 'ID');
         $grid->column('user_name', '账号')->filter('like');
         $grid->column('user_realname', '用户姓名')->filter('like');

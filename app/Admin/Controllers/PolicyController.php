@@ -36,7 +36,7 @@ class PolicyController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new StorePolicy);
-
+        $grid->model()->orderBy('policy_id','desc');
         $grid->column('policy_id', __('ID'));
         $grid->column('policy_title', '政策标题')->filter('like');
 //        $grid->column('policy_author', '政策作者')->filter('like');

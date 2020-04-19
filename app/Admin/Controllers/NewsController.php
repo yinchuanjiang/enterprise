@@ -26,7 +26,7 @@ class NewsController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new News);
-
+        $grid->model()->orderBy('news_id','desc');
         $grid->column('news_id', 'ID');
         $grid->column('category.category_name', '栏目')->label('info');
         $grid->column('news_title', '标题')->filter('like');
