@@ -37,13 +37,13 @@ class UserController extends AdminController
 //        })->label('info')->filter(UserEnum::getTypes());
         $grid->column('fields', '关注热点')->pluck('category_name')->label('success');
         $grid->column('category.category_name', '用户子类型')->label('success');
-        $grid->column('wechat', '绑定微信信息')->display(function ($wechat){
-            if(!$wechat){
-                return '<span class="label label-danger">未绑定</span>';
-            }else{
-                return '<span class="label label-success">已绑定</span>';
-            }
-        });
+//        $grid->column('wechat', '绑定微信信息')->display(function ($wechat){
+//            if(!$wechat){
+//                return '<span class="label label-danger">未绑定</span>';
+//            }else{
+//                return '<span class="label label-success">已绑定</span>';
+//            }
+//        });
         //$grid->column('status', '状态')->filter(UserEnum::getStatus())->radio(UserEnum::getStatus());
         $grid->column('status', '状态')->display(function ($status){
             return UserEnum::getStatusName($status);
