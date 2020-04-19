@@ -33,7 +33,7 @@ class CompanyController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new StoreCompany);
-
+        $grid->model()->orderBy('company_id','desc');
         $grid->column('company_id', 'ID');
         $grid->column('company_name', '企业名称');
         $grid->column('is_high', '是否高新')->display(function ($isHigh){
