@@ -46,6 +46,7 @@ class CompanyController extends AdminController
             // 去掉查看
             $actions->disableView();
         });
+        $grid->disableBatchActions();
         return $grid;
     }
 

@@ -21,7 +21,7 @@ class CategoryController extends Controller
      *
      * @var string
      */
-    protected $title = '行业明细管理';
+    protected $title = '分类数据管理';
 
     /**
      * Index interface.

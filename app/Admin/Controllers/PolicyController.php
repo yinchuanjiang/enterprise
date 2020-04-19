@@ -63,6 +63,7 @@ class PolicyController extends AdminController
         $grid->tools(function (Grid\Tools $tools) {
             $tools->append(new Push());
         });
+        $grid->disableBatchActions();
 
         $this->script = <<<EOL
         $('#app-admin-actions-policy-push .modal-body').append('<iframe src="/admin/users/html" width="100%" height="600" frameborder="no" border="0"></iframe>');
