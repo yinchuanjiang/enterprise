@@ -108,7 +108,7 @@ EOT;
     protected function form()
     {
         $form = new Form(new Banner);
-        $form->image('image_url', 'banner图片')->required()->uniqueName()->placeholder('*建议图片长宽比 1:2');
+        $form->image('image_url', 'banner图片')->required()->uniqueName()->help('*建议图片长宽比 5:2 或者1000*400px');
         //$form->select('type', '显示位置')->options(BannerEnum::getTyps())->required()->default(BannerEnum::BANNER_TYPE_HOME);
         $form->hidden('type')->value(BannerEnum::BANNER_TYPE_HOME);
         $form->switch('status','状态')->states(BannerEnum::getSwitchStatus())->default(BannerEnum::STATUS_TRUE);
