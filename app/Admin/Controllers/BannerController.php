@@ -112,7 +112,7 @@ EOT;
         //$form->select('type', '显示位置')->options(BannerEnum::getTyps())->required()->default(BannerEnum::BANNER_TYPE_HOME);
         $form->hidden('type')->value(BannerEnum::BANNER_TYPE_HOME);
         $form->switch('status','状态')->states(BannerEnum::getSwitchStatus())->default(BannerEnum::STATUS_TRUE);
-        $form->text('sort', __('Sort'))->setWidth(2,2)->default(0)->help('数字小排序靠前')->rules('numeric',[
+        $form->text('sort','排序')->setWidth(2,2)->default(0)->help('数字小排序靠前')->rules('numeric',[
             'numeric' => '排序必须是数字'
         ])->icon('fa-sort-numeric-asc');
 
