@@ -24,16 +24,18 @@ class Pass extends RowAction
         } else {
             $company_name = $model->user_realname;
             $company_nature = '企业';
-            $company = StoreCompany::create(compact('company_name','company_nature'));
+            $company = StoreCompany::create(compact('company_name', 'company_nature'));
             $company_id = $company->company_id;
         }
         $user_id = $model->user_id;
         $has = DB::table('t_store_company_user')->where(compact('user_id', 'company_id'))->first();
         if (!$has)
             DB::table('t_store_company_user')->insert(compact('user_id', 'company_id'));
-        $store = DB::table('t_base_store')->where('store_code','company')->first();
+        $store = DB::table('t_base_store')->where('store_code', 'company')->first();
         $indetail = DB::table('t_user_field')->where(compact('user_id'))->first();
-        DB::table('t_store_store_category')->insert(['record_id' => $company_id,'store_id' => $store->store_id,'category_id' => $indetail->field_id]);
+        $relation = DB::table('t_store_store_category')->where(['record_id' => $company_id, 'store_id' => $store->store_id, 'category_id' => $indetail->field_id])->first();
+        if (!$relation)
+            DB::table('t_store_store_category')->insert(['record_id' => $company_id, 'store_id' => $store->store_id, 'category_id' => $indetail->field_id]);
         $model->status = UserEnum::STATUS_PASS;
         $model->save();
         return $this->response()->success('审核通过成功.')->refresh();

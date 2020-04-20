@@ -5,11 +5,13 @@ namespace App\Admin\Controllers;
 use App\Admin\Actions\User\Pass;
 use App\Admin\Actions\User\Refuse;
 use App\Models\Enum\UserEnum;
+use App\Models\StoreCompany;
 use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Support\Facades\DB;
 
 class CompanyUserController extends AdminController
 {
@@ -33,6 +35,13 @@ class CompanyUserController extends AdminController
         $grid->column('user_name', '账号')->filter('like');
         $grid->column('user_realname', '用户姓名')->filter('like');
         $grid->column('mobile', '手机号')->filter('like');
+        $grid->column('xx', '所属企业')->display(function ($xx){
+            $companyUser = DB::table('t_store_company_user')->where('user_id',$this->user_id)->first();
+            if(!$companyUser)
+                return '';
+            $company = StoreCompany::find($companyUser->company_id);
+            return $company->company_name;
+        })->label('info');
 //        $grid->column('user_type','用户类型')->display(function ($type){
 //            return UserEnum::getTypeName($type);
 //        })->label('info')->filter(UserEnum::getTypes());
