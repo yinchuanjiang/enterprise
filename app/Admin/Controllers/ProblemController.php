@@ -58,7 +58,7 @@ class ProblemController extends AdminController
             ProblemEnum::STATUS_CHECK => 'info',
             ProblemEnum::STATUS_DONE => 'success',
         ]);
-        $grid->column('是否热门','状态')->switch(ProblemEnum::getSwitchStatus());
+        $grid->column('is_hot','是否热门')->switch(ProblemEnum::getSwitchStatus());
         $grid->column('create_time', '创建时间');
 
         $grid->tools(function (Grid\Tools $tools) {
