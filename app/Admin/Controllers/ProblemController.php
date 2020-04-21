@@ -6,6 +6,7 @@ use App\Admin\Actions\Problem\BatchCheck;
 use App\Admin\Actions\Problem\BatchPoint;
 use App\Models\Enum\ProblemEnum;
 use App\Models\Problem;
+use App\Models\ProblemRecord;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
