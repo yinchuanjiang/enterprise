@@ -26,11 +26,13 @@ class NewsController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new News);
+        $grid->model()->orderBy('sort','asc');
         $grid->model()->orderBy('news_id','desc');
         $grid->column('news_id', 'ID');
         $grid->column('category.category_name', '栏目')->label('info');
         $grid->column('news_title', '标题')->filter('like');
         $grid->column('news_author', '作者')->filter('like');
+        $grid->column('sort', '排序')->editable()->sortable();
         $grid->column('create_time', '创建时间');
         $grid->disableExport();
         $grid->actions(function ($actions) {
@@ -81,6 +83,9 @@ class NewsController extends AdminController
         $form->text('source_name', '来源网站名称');
         $form->text('source_url', '来源网站地址');
         $form->image('pic_url', '图片展示');
+        $form->text('sort','排序')->setWidth(2,2)->default(0)->help('数字小排序靠前')->rules('numeric',[
+            'numeric' => '排序必须是数字'
+        ])->icon('fa-sort-numeric-asc');
 
         return $form;
     }

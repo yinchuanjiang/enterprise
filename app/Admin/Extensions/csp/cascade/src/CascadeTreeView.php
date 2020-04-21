@@ -99,6 +99,7 @@ class CascadeTreeView extends Field
             $categoryKeywordsTrue = BaseCategory::whereIn('category_id', $nodeIds)->whereNotNull('keywords')->pluck('keywords')->toArray();
 
         }else{
+            $names  = [];
             $categoryKeywords = [];
             $categoryKeywordsTrue = [];
         }
