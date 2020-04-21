@@ -70,6 +70,7 @@ class ProblemController extends AdminController
         $grid->actions(function ($actions) {
             // 去掉查看
             $actions->disableView();
+            $actions->disableEdit();
         });
         return $grid;
     }
