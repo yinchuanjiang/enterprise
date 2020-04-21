@@ -3,6 +3,7 @@
 namespace App\Admin\Actions\Problem;
 
 use App\Models\Enum\ProblemEnum;
+use App\Models\ProblemRecord;
 use Encore\Admin\Actions\BatchAction;
 use Illuminate\Database\Eloquent\Collection;
 
