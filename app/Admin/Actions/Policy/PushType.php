@@ -2,6 +2,7 @@
 
 namespace App\Admin\Actions\Policy;
 
+use App\Models\StorePolicyUser;
 use Encore\Admin\Actions\RowAction;
 use Illuminate\Database\Eloquent\Model;
 
