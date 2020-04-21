@@ -32,13 +32,13 @@ class ProblemController extends AdminController
     {
         $grid = new Grid(new Problem);
         if (Admin::user()->isRole('manger') || Admin::user()->isRole('administrator')){
-
+            $grid->model()->orderBy('problem_id','desc');
         }else{
             if(Admin::user()->isRole('answer')){
-                $grid->model()->where('answer_user_id',Admin::user()->id);
+                $grid->model()->where('answer_user_id',Admin::user()->id)->orderBy('problem_id','desc');
             }
             if(Admin::user()->isRole('check')){
-                $grid->model()->where('check_user_id',Admin::user()->id);
+                $grid->model()->where('check_user_id',Admin::user()->id)->orderBy('problem_id','desc');
             }
         }
 
@@ -63,7 +63,7 @@ class ProblemController extends AdminController
             if (Admin::user()->isRole('manger') || Admin::user()->isRole('administrator')){
                 $tools->append(new BatchPoint());
             }
-            if(Admin::user()->isRole('check')){
+            if(Admin::user()->isRole('check') || Admin::user()->isRole('administrator')){
                 $tools->append(new BatchCheck());
             }
         });
