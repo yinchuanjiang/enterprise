@@ -58,6 +58,7 @@ class ProblemController extends AdminController
             ProblemEnum::STATUS_CHECK => 'info',
             ProblemEnum::STATUS_DONE => 'success',
         ]);
+        $grid->column('是否热门','状态')->switch(ProblemEnum::getSwitchStatus());
         $grid->column('create_time', '创建时间');
 
         $grid->tools(function (Grid\Tools $tools) {
@@ -127,6 +128,7 @@ class ProblemController extends AdminController
         $form->textarea('content', '问题内容')->readonly();
         $form->text('source_url', '问题来源')->readonly();
         $form->text('others', __('其它说明'))->readonly();
+        $form->switch('is_hot','是否热门')->states(ProblemEnum::getSwitchStatus())->default(ProblemEnum::HOT_FALSE);
         $form->textarea('answer', '回答');
         $form->saved(function (Form $form){
             $problem = $form->model();

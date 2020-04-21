@@ -10,6 +10,9 @@ class ProblemEnum
     const STATUS_CHECK = 3;
     const STATUS_DONE = 4;
 
+    const HOT_TRUE = 1;
+    const HOT_FALSE = -1;
+
     /**
      * @param $status
      * @return string
@@ -40,6 +43,17 @@ class ProblemEnum
             self::STATUS_PASS_TO_PREFECTURAL => '处理中',
             self::STATUS_CHECK => '审核中',
             self::STATUS_DONE => '已完成',
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public static function getSwitchStatus()
+    {
+        return [
+            'on' => ['value' => self::HOT_TRUE, 'text' => '是', 'color' => 'success'],
+            'off' => ['value' => self::HOT_FALSE, 'text' => '否', 'color' => 'danger'],
         ];
     }
 }
