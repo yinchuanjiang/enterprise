@@ -6,6 +6,7 @@ use App\Models\Enum\ProblemEnum;
 use App\Models\ProblemRecord;
 use Encore\Admin\Actions\BatchAction;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 
 class BatchCheck extends BatchAction
 {
