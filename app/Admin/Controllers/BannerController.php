@@ -68,8 +68,8 @@ class BannerController extends AdminController
         swal({
             width: '60%',
             imageUrl: '/uploads/'+url,
-        })
-    })
+        });
+    });
 EOT;
         Admin::script($this->script);
 
