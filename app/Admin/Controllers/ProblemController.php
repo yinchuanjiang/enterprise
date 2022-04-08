@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Actions\Problem\Answer;
 use App\Admin\Actions\Problem\BatchCheck;
 use App\Admin\Actions\Problem\BatchPoint;
 use App\Models\Enum\ProblemEnum;
@@ -68,11 +69,14 @@ class ProblemController extends AdminController
             if(Admin::user()->isRole('check') || Admin::user()->isRole('administrator')){
                 $tools->append(new BatchCheck());
             }
+
         });
         $grid->disableCreateButton();
         $grid->actions(function ($actions) {
             // 去掉查看
             $actions->disableView();
+            $actions->disableEdit();
+            $actions->add(new Answer());
         });
         return $grid;
     }
