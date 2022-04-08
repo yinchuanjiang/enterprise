@@ -8,7 +8,6 @@ use App\Models\Enum\ProblemEnum;
 use App\Models\Problem;
 use App\Models\ProblemRecord;
 use Encore\Admin\Controllers\AdminController;
-use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
@@ -76,6 +75,10 @@ class ProblemController extends AdminController
             // 去掉查看
             $actions->disableView();
         });
+        $this->script = <<<EOT
+        $('.column-__actions__').hide();
+EOT;
+        Admin::script($this->script);
         return $grid;
     }
 
