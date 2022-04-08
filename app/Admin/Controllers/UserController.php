@@ -45,11 +45,7 @@ class UserController extends AdminController
 //            }
 //        });
         //$grid->column('status', '状态')->filter(UserEnum::getStatus())->radio(UserEnum::getStatus());
-        $grid->column('status', '状态')->radio(UserEnum::getStatus())->filter(UserEnum::getStatus())->label([
-            UserEnum::STATUS_TO_PASS => 'warning',
-            UserEnum::STATUS_NO_PASS => 'danger',
-            UserEnum::STATUS_PASS => 'success'
-        ]);
+        $grid->column('status', '状态')->radio(UserEnum::getStatus())->filter(UserEnum::getStatus());
         $grid->column('create_time', '注册时间');
         $grid->disableExport();
         $grid->actions(function ($actions) {
