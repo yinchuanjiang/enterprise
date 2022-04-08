@@ -52,6 +52,7 @@ class UserController extends AdminController
         ]);
         $grid->column('create_time', '注册时间');
         $grid->disableExport();
+        $grid->disableActions();
         $grid->actions(function ($actions) {
             // 去掉查看
             $actions->disableView();
