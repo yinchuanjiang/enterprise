@@ -72,8 +72,6 @@ class BannerController extends AdminController
     });
 EOT;
         Admin::script($this->script);
-
-
         return $grid;
     }
 
