@@ -1,4 +1,4 @@
-@servers(['web' => 'root@212.64.74.233'])
+@servers(['web' => 'root@49.235.226.229'])
 
 @task('deploy', ['on' => ['web'], 'parallel' => true])
 cd /www/wwwroot/enterprise

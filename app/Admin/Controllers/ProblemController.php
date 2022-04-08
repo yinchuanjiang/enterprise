@@ -13,6 +13,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
+use Encore\Admin\Admin;
 
 class ProblemController extends AdminController
 {
@@ -69,10 +70,15 @@ class ProblemController extends AdminController
                 $tools->append(new BatchCheck());
             }
         });
+        $grid->disableCreateButton();
         $grid->actions(function ($actions) {
             // 去掉查看
             $actions->disableView();
         });
+        $this->script = <<<EOT
+        $('.column-__actions__').hide();
+EOT;
+        Admin::script($this->script);
         return $grid;
     }
 
