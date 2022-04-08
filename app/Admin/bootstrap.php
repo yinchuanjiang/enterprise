@@ -22,12 +22,12 @@ use App\Admin\Extensions\Form\UEditor;
 use App\Admin\Extensions\Form\NewUEditor;
 use Encore\Admin\Form;
 
-Encore\Admin\Form::forget(['map', 'editor']);
-\Encore\Admin\Admin::js('vendor/laravel-admin-ext/cascade/bootstrap-treeview.min.js');
-\Encore\Admin\Admin::js('js/admin.js');
-\Encore\Admin\Admin::js('js/axios.min.js');
+Form::forget(['map']);
+Admin::js('vendor/laravel-admin-ext/cascade/bootstrap-treeview.min.js');
+Admin::js('js/admin.js');
+Admin::js('js/axios.min.js');
 Admin::css('vendor/laravel-admin-ext/cascade/bootstrap-treeview.min.css');
-Form::extend('ueditor', UEditor::class);
+//Form::extend('editor', UEditor::class);
 Form::extend('neditor', NewUEditor::class);
 Form::extend('tags', \App\Admin\Extensions\Form\Tags::class);
 Form::extend('teches', \App\Admin\Extensions\Form\Teches::class);

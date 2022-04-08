@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Extensions\Form\UEditor;
 use App\Models\BaseCategory;
 use App\Models\News;
 use Encore\Admin\Controllers\AdminController;
@@ -75,11 +76,10 @@ class NewsController extends AdminController
     protected function form()
     {
         $form = new Form(new News);
-
         $form->text('news_title', '标题')->required();
         $form->text('news_author', '作者');
         $form->select('category_id', '新闻栏目')->options(BaseCategory::selectOptions(null,'',1310));
-        $form->ueditor('news_content', '内容');
+        $form->editor('news_content', '内容');
         $form->text('source_name', '来源网站名称');
         $form->text('source_url', '来源网站地址');
         $form->image('pic_url', '图片展示');
