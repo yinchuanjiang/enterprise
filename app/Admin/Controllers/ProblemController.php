@@ -8,11 +8,11 @@ use App\Models\Enum\ProblemEnum;
 use App\Models\Problem;
 use App\Models\ProblemRecord;
 use Encore\Admin\Controllers\AdminController;
+use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
-use Encore\Admin\Admin;
 
 class ProblemController extends AdminController
 {
@@ -78,7 +78,7 @@ class ProblemController extends AdminController
         $this->script = <<<EOT
         $('.column-__actions__').hide();
 EOT;
-        Admin::script($this->script);
+        \Encore\Admin\Admin::script($this->script);
         return $grid;
     }
 
