@@ -75,10 +75,6 @@ class ProblemController extends AdminController
             // 去掉查看
             $actions->disableView();
         });
-        $this->script = <<<EOT
-        $('.column-__actions__').hide();
-EOT;
-        Admin::script($this->script);
         return $grid;
     }
 
