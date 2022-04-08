@@ -40,6 +40,8 @@ class CompanyUserController extends AdminController
             if(!$companyUser)
                 return '';
             $company = StoreCompany::find($companyUser->company_id);
+            if(!$company)
+                return '';
             return $company->company_name;
         })->label('info');
 //        $grid->column('user_type','用户类型')->display(function ($type){
