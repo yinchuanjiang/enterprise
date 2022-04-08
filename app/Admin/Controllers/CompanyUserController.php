@@ -52,9 +52,7 @@ class CompanyUserController extends AdminController
         $grid->column('business_license_pic', '营业执照图片');
 
         //$grid->column('status', '状态')->filter(UserEnum::getStatus())->radio(UserEnum::getStatus());
-        $grid->column('status', '状态')->display(function ($status){
-            return UserEnum::getStatusName($status);
-        })->filter(UserEnum::getStatus())->label([
+        $grid->column('status', '状态')->radio(UserEnum::getStatus())->filter(UserEnum::getStatus())->label([
             UserEnum::STATUS_TO_PASS => 'warning',
             UserEnum::STATUS_NO_PASS => 'danger',
             UserEnum::STATUS_PASS => 'success'
